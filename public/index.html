@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>pixhub-rs · API</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="container">
+  <div class="hero">
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="切换主题">
+      <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+    <svg class="logo-svg" width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="1.5" y="1.5" width="57" height="57" rx="15" fill="var(--logo-bg)" stroke="url(#logo-border)" stroke-width="1.2"/>
+      <rect x="11" y="11" width="14" height="14" rx="3.5" fill="url(#logo-p1)"/>
+      <rect x="28" y="11" width="21" height="14" rx="3.5" fill="url(#logo-p2)"/>
+      <rect x="11" y="28" width="21" height="21" rx="3.5" fill="url(#logo-p3)"/>
+      <rect x="35" y="28" width="14" height="21" rx="3.5" fill="url(#logo-p4)"/>
+      <defs>
+        <linearGradient id="logo-border" x1="0" y1="0" x2="60" y2="60">
+          <stop offset="0%" stop-color="#7c3aed" stop-opacity=".4"/><stop offset="50%" stop-color="#a78bfa" stop-opacity=".15"/><stop offset="100%" stop-color="#10b981" stop-opacity=".15"/>
+        </linearGradient>
+        <linearGradient id="logo-p1" x1="0" y1="0" x2="14" y2="14"><stop offset="0%" stop-color="#7c3aed"/><stop offset="100%" stop-color="#6d28d9"/></linearGradient>
+        <linearGradient id="logo-p2" x1="0" y1="0" x2="21" y2="14"><stop offset="0%" stop-color="#8b5cf6"/><stop offset="100%" stop-color="#a78bfa"/></linearGradient>
+        <linearGradient id="logo-p3" x1="0" y1="0" x2="21" y2="21"><stop offset="0%" stop-color="#7c3aed"/><stop offset="100%" stop-color="#6d28d9"/></linearGradient>
+        <linearGradient id="logo-p4" x1="0" y1="0" x2="14" y2="21"><stop offset="0%" stop-color="#6d28d9"/><stop offset="100%" stop-color="#5b21b6"/></linearGradient>
+      </defs>
+    </svg>
+    <h1>pixhub-rs</h1>
+    <div class="sub">pixiv 与 douyin 资源后端 API</div>
+    <div class="status-bar">
+      <div class="status-item"><span class="status-dot"></span> 运行中</div>
+      <div class="status-item"><span class="status-icon">⚡</span> Rust · Axum · SQLite</div>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="section pixiv">
+      <div class="section-head"><span class="dot"></span>Pixiv 图片<span class="tag">4 端点</span></div>
+      <div class="section-body">
+        <div class="card" data-url="/pixiv/artworks/random"><span class="method get">GET</span><div class="card-body"><div class="card-url"><a href="/pixiv/artworks/random">/pixiv/artworks/random</a></div><div class="card-desc">随机获取一张 pixiv 图片信息</div></div><button class="card-copy" onclick="copy(this)">复制</button></div>
+        <div class="card" data-url="/pixiv/artworks/info?list=文件名"><span class="method get">GET</span><div class="card-body"><div class="card-url"><a href="/pixiv/artworks/info?list=%E6%96%87%E4%BB%B6%E5%90%8D">/pixiv/artworks/info?list={文件名}</a></div><div class="card-desc">根据文件名查询 pixiv 图片信息</div></div><button class="card-copy" onclick="copy(this)">复制</button></div>
+        <div class="card" data-url="/pixiv/artworks/view"><span class="method get">GET</span><div class="card-body"><div class="card-url"><a href="/pixiv/artworks/view">/pixiv/artworks/view</a></div><div class="card-desc">直接查看随机 pixiv 图片</div></div><button class="card-copy" onclick="copy(this)">复制</button></div>
+        <div class="card" data-url="/pixiv/artworks/file/%E6%96%87%E4%BB%B6%E5%90%8D"><span class="method get">GET</span><div class="card-body"><div class="card-url">/pixiv/artworks/file/{文件名}</div><div class="card-desc">获取 pixiv 图片文件</div></div><button class="card-copy" onclick="copy(this)">复制</button></div>
+      </div>
+    </div>
+    <div class="section plus">
+      <div class="section-head"><span class="dot"></span>Plus 视频<span class="tag">5 端点</span></div>
+      <div class="section-body">
+        <div class="card" data-url="/plus/artworks/random"><span class="method get">GET</span><div class="card-body"><div class="card-url"><a href="/plus/artworks/random">/plus/artworks/random</a></div><div class="card-desc">随机获取一个视频信息</div></div><button class="card-copy" onclick="copy(this)">复制</button></div>
+        <div class="card" data-url="/plus/artworks/info?list=%E4%BD%9C%E8%80%85%E5%90%8D%E6%88%96%E4%BD%9C%E8%80%85ID"><span class="method get">GET</span><div class="card-body"><div class="card-url"><a href="/plus/artworks/info?list=%E4%BD%9C%E8%80%85%E5%90%8D%E6%88%96%E4%BD%9C%E8%80%85ID">/plus/artworks/info?list={作者}</a></div><div class="card-desc">根据作者名或作者 ID 查询视频信息</div></div><button class="card-copy" onclick="copy(this)">复制</button></div>
+        <div class="card" data-url="/plus/artworks/info?list=all"><span class="method get">GET</span><div class="card-body"><div class="card-url"><a href="/plus/artworks/info?list=all">/plus/artworks/info?list=all</a></div><div class="card-desc">获取所有作者列表</div></div><button class="card-copy" onclick="copy(this)">复制</button></div>
+        <div class="card" data-url="/plus/artworks/view"><span class="method get">GET</span><div class="card-body"><div class="card-url"><a href="/plus/artworks/view">/plus/artworks/view</a></div><div class="card-desc">直接查看随机视频</div></div><button class="card-copy" onclick="copy(this)">复制</button></div>
+        <div class="card" data-url="/plus/artworks/file/%E6%96%87%E4%BB%B6%E5%90%8D"><span class="method get">GET</span><div class="card-body"><div class="card-url">/plus/artworks/file/{文件名}</div><div class="card-desc">获取视频文件</div></div><button class="card-copy" onclick="copy(this)">复制</button></div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <span>pixhub-rs v1.0</span>
+    <span class="footer-sep">·</span>
+    <a href="https://github.com/tangxifox/pixhub-rs" target="_blank" rel="noopener">GitHub</a>
+    <span class="footer-sep">·</span>
+    <span>Apache-2.0</span>
+  </div>
+</div>
+<script src="/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+[package]
+name = "pixhub"
+version = "1.0.0"
+edition = "2024"
+description = "pixiv与douyin的资源后端 (Rust port)"
+
+[dependencies]
+axum = { version = "0.8", features = ["macros"] }
+tokio = { version = "1", features = ["full"] }
+rusqlite = { version = "0.32", features = ["bundled"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tower-http = { version = "0.6", features = ["cors", "compression-gzip"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["json", "env-filter"] }
+tracing-appender = "0.2"
+dotenvy = "0.15"
+notify = "7"
+chrono = { version = "0.4", features = ["serde"] }
+uuid = { version = "1", features = ["v4"] }
+tower = "0.5"
+urlencoding = "2"
