@@ -147,7 +147,7 @@ impl Db {
             "SELECT * FROM files WHERE type='pixiv' ORDER BY RANDOM() LIMIT 1",
         )?;
         let mut rows = stmt.query_map([], Self::map_file_row)?;
-        Ok(rows.next().transpose()?)
+        rows.next().transpose()
     }
 
     pub fn get_random_plus(&self) -> Result<Option<FileRow>, rusqlite::Error> {
@@ -155,7 +155,7 @@ impl Db {
             "SELECT * FROM files WHERE type='plus' ORDER BY RANDOM() LIMIT 1",
         )?;
         let mut rows = stmt.query_map([], Self::map_file_row)?;
-        Ok(rows.next().transpose()?)
+        rows.next().transpose()
     }
 
     pub fn find_file(
@@ -177,7 +177,7 @@ impl Db {
                 title: None,
             })
         })?;
-        Ok(rows.next().transpose()?)
+        rows.next().transpose()
     }
 
     pub fn search_pixiv(&self, term: &str) -> Result<Option<FileRow>, rusqlite::Error> {
@@ -185,7 +185,7 @@ impl Db {
             "SELECT * FROM files WHERE type='pixiv' AND filename LIKE ? LIMIT 1",
         )?;
         let mut rows = stmt.query_map(params![format!("%{}%", term)], Self::map_file_row)?;
-        Ok(rows.next().transpose()?)
+        rows.next().transpose()
     }
 
     pub fn get_pixiv_pages(

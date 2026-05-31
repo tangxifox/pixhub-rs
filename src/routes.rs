@@ -714,8 +714,9 @@ async fn serve_video_file(
             format!("inline; filename=\"{}\"", urlencoding::encode(filename)),
         );
 
-    if let Some(range_str) = headers.get("range").and_then(|v| v.to_str().ok()) {
-        if let Some(range_val) = range_str.strip_prefix("bytes=") {
+    if let Some(range_str) = headers.get("range").and_then(|v| v.to_str().ok())
+        && let Some(range_val) = range_str.strip_prefix("bytes=")
+    {
             let parts: Vec<&str> = range_val.split('-').collect();
             let start: u64 = parts.first().and_then(|s| s.parse().ok()).unwrap_or(0);
             let end: u64 = parts
@@ -748,7 +749,6 @@ async fn serve_video_file(
                 .body(Body::from(chunk))
                 .map_err(|_| AppError::new(StatusCode::INTERNAL_SERVER_ERROR, "RESPONSE_ERROR", "构建响应失败"))?;
             return Ok(resp);
-        }
     }
 
     let data = tokio::fs::read(file_path).await.map_err(|_| {

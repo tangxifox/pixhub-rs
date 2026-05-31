@@ -179,10 +179,10 @@ fn spawn_watcher(r#type: &'static str, root: PathBuf, db: Arc<Mutex<Db>>) {
                             }
 
                             // Debounce check
-                            if let Some(last) = last_event.get(path) {
-                                if now.duration_since(*last) < Duration::from_secs(1) {
-                                    continue;
-                                }
+                            if let Some(last) = last_event.get(path)
+                                && now.duration_since(*last) < Duration::from_secs(1)
+                            {
+                                continue;
                             }
                             last_event.insert(path.clone(), now);
 
