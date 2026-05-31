@@ -18,7 +18,7 @@ jobs:
       - run: cargo build --release
       - run: cargo clippy -- -D warnings
       - run: cp target/release/pixhub target/release/pixhub-rs
-      - uses: actions/upload-artifact@v5
+      - uses: actions/upload-artifact@v6
         with:
           name: pixhub-rs
           path: target/release/pixhub-rs
